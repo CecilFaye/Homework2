@@ -19,27 +19,26 @@ namespace GroceryCartAPI.Controllers
             if (groceryItems == null)
             {
                 groceryItems = new List<GroceryItem>();
+
                 
                 List<string> items = new List<string>()
                 {
-                    "Apple", "Banana", "Carrot", "Lemon", "Strawberry", "Chicken",
-                    "Grapes", "Watermelon", "Pineapple", "Kiwi", "Peach", "Pork",
-                    "Lettuce", "Tomato", "Onion", "Garlic", "Pepper", "Salt",
-                    "Sugar", "Eggplant", "Spinach", "Beans", "Beef",  "Tuna",
-                    "Crab", "Shrimp", "Lobster", "Coffee", "Milk", "Chocolate" 
+                    "Apple", "Banana", "Carrot", "Lemon", "Strawberry",
+                    "Grapes", "Watermelon", "Pineapple", "Kiwi", "Peach",
+                    "Lettuce", "Tomato", "Onion", "Garlic", "Eggplant"
                 };
 
                 Random random = new Random();
 
-                for (int i = 1; i <= 30; i++)
+                for (int i = 1; i <= 15; i++)
                 {
                    
                     var item = new GroceryItem
                     {
                         ItemId = i,
                         ItemName = items[i - 1],
+                        ImageUrl = "item" + items[i - 1].ToLower() + ".png",
                         Price = random.Next(10, 100),
-                        Quantity = random.Next(1,10)
                     };
 
                     groceryItems.Add(item);
@@ -47,15 +46,15 @@ namespace GroceryCartAPI.Controllers
             }
         }
 
-        [HttpGet("GetProductByID", Name = "GetProductByID")]
-        public IActionResult GetByID(int id)
+        [HttpGet(Name = "GetProducts")]
+        public IActionResult GetProducts()
         {
             if (groceryItems == null)
             {
                 return NotFound("Product not found!");
             }
 
-            var existingItem = groceryItems.FirstOrDefault(x => x.ItemId == id);
+            var existingItem = groceryItems;
 
             if (existingItem != null)
             {

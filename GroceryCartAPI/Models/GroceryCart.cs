@@ -1,6 +1,6 @@
 ﻿namespace GroceryCartAPI.Models
 {
-    public class GroceryItem
+    public class GroceryCart
     {
         public int? ItemId { get; set; }
         public string? ItemName { get; set; }
